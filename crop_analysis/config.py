@@ -6,7 +6,7 @@ class Config:
     ENV = 'production'
     SECRET_KEY = 'enter a secret key'
     # SQLALCHEMY_DATABASE_URI = "postgresql://postgres:root@localhost:5432/adt_crop"
-    SQLALCHEMY_DATABASE_URI = "postgresql://adt_crop_user:7492hYlXQABqN0S621hvkWJvE7VtUgNh@dpg-cgvg3bks3fvmvqdegcr0-a.oregon-postgres.render.com/adt_crop"
+    SQLALCHEMY_DATABASE_URI = "postgresql://adt_crop_65fs_user:s396zNUuUuYzw110kwxtMSlJOmAWHz2m@dpg-cgvirlodh87joks31290-a/adt_crop_65fs"
     MAIL_SERVER = 'smtp.gmail.com'
     MAIL_PORT = 465
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME' , 'tourdemonde101@gmail.com')
