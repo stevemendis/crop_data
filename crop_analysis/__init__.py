@@ -78,8 +78,7 @@ def create_app(config=DevelopmentConfig):
         db.session.commit()
         
     # Steve & Meghana
-    @app.before_first_request
-    def do_something_only_once():
+    
         
         with open('finaldata.csv') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -112,7 +111,7 @@ def create_app(config=DevelopmentConfig):
                 except Exception as e:
                     print(f"Failed to insert row {row}: {str(e)}")
                     db.session.rollback()
-        return True
+        #return True
         # with open('finaldata.csv') as file:
             
         #     for line in file:
