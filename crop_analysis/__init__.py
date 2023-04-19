@@ -80,37 +80,37 @@ def create_app(config=DevelopmentConfig):
     # Steve & Meghana
     
         
-        with open('finaldata.csv') as csv_file:
-            csv_reader = csv.reader(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            next(csv_reader) # Skip first row
-            for row in csv_reader:
-                try:
-                    state = State.query.filter_by(state_name=row[0]).first()
-                    if not state:
-                        state = State(state_name=row[0])
-                        db.session.add(state)
-                        db.session.commit()
-                    crop = Crop.query.filter_by(crop_name=row[1]).first()
-                    if not crop:
-                        crop = Crop(crop_name=row[1])
-                        db.session.add(crop)
-                        db.session.commit()
-                    season = Season.query.filter_by(season_name=row[2]).first()
-                    if not season:
-                        season = Season(season_name=row[2])
-                        db.session.add(season)
-                        db.session.commit()
-                    district = District.query.filter_by(district_name=row[3]).first()
-                    if not district:
-                        district = District(district_name=row[3], state_id=state.state_id)
-                        db.session.add(district)
-                        db.session.commit()
-                    crop_data = CropData(crop_id=crop.crop_id, season_id=season.season_id, district_id=district.district_id, area=row[4], production=row[5], yield_data=row[6], profit=row[7], rainfall=row[8], year=row[9])
-                    db.session.add(crop_data)
-                    db.session.commit()
-                except Exception as e:
-                    print(f"Failed to insert row {row}: {str(e)}")
-                    db.session.rollback()
+        # with open('finaldata.csv') as csv_file:
+        #     csv_reader = csv.reader(csv_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        #     next(csv_reader) # Skip first row
+        #     for row in csv_reader:
+        #         try:
+        #             state = State.query.filter_by(state_name=row[0]).first()
+        #             if not state:
+        #                 state = State(state_name=row[0])
+        #                 db.session.add(state)
+        #                 db.session.commit()
+        #             crop = Crop.query.filter_by(crop_name=row[1]).first()
+        #             if not crop:
+        #                 crop = Crop(crop_name=row[1])
+        #                 db.session.add(crop)
+        #                 db.session.commit()
+        #             season = Season.query.filter_by(season_name=row[2]).first()
+        #             if not season:
+        #                 season = Season(season_name=row[2])
+        #                 db.session.add(season)
+        #                 db.session.commit()
+        #             district = District.query.filter_by(district_name=row[3]).first()
+        #             if not district:
+        #                 district = District(district_name=row[3], state_id=state.state_id)
+        #                 db.session.add(district)
+        #                 db.session.commit()
+        #             crop_data = CropData(crop_id=crop.crop_id, season_id=season.season_id, district_id=district.district_id, area=row[4], production=row[5], yield_data=row[6], profit=row[7], rainfall=row[8], year=row[9])
+        #             db.session.add(crop_data)
+        #             db.session.commit()
+        #         except Exception as e:
+        #             print(f"Failed to insert row {row}: {str(e)}")
+        #             db.session.rollback()
         #return True
         # with open('finaldata.csv') as file:
             
