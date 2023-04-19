@@ -23,8 +23,6 @@ itsdangerous==2.1.2
 Jinja2==3.1.2
 Mako==1.2.3
 MarkupSafe==2.1.1
-numpy==1.24.2
-pandas==1.5.3
 psycopg2-binary==2.9.5
 PyJWT==2.5.0
 python-dateutil==2.8.2
