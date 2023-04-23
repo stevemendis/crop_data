@@ -370,3 +370,38 @@ def logout():
     jti = get_jwt()["jti"]
     BLOCKLIST.add(jti)
     return response
+  
+
+@user.route('/crop/visualize', methods=['GET'])
+@jwt_required()
+def crop_production_by_state():
+    district_name = request.json.get('district_name', '')
+    district_id = District.query.filter_by(district_name=district_name).first()
+    print("DSa", district_id.district_id)
+    crop_data = CropData.query.filter_by(district_id=district_id.district_id).all()
+    crop_data_obj = []
+    for crop in crop_data:
+        temp = {}
+        crop_id = Crop.query.filter_by(crop_id=crop.crop_id).first()
+        temp["crop_name"] = crop_id.crop_name
+        temp["area"] = crop.area
+        temp["production"] = crop.production
+        temp["yield_data"] = crop.yield_data
+        temp["profit"] = crop.profit
+        temp["rainfall"] = crop.rainfall
+        crop_data_obj.append(temp)
+    crops = {}
+    for data in crop_data_obj:
+        name = data['crop_name']
+        if name in crops:
+            crops[name]['profit'].append(data['profit'])
+            crops[name]['yield_data'].append(data['yield_data'])
+        else:
+            crops[name] = {'crop_name': name, 'profit': [data['profit']], 'yield_data': [data['yield_data']]}
+    
+    result = []
+    for crop in crops.values():
+        crop['profit'] = sum(crop['profit']) / len(crop['profit'])
+        crop['yield_data'] = sum(crop['yield_data']) / len(crop['yield_data'])
+        result.append(crop)
+    return jsonify(result)
