@@ -8,7 +8,7 @@ from flask_jwt_extended import JWTManager
 from twilio.rest import Client
 import csv
 import os
-
+from flask_cors import CORS
 
 
 print(os.getcwd())
@@ -16,6 +16,7 @@ db = SQLAlchemy()
 migrate = Migrate()
 mail = Mail()
 jwt = JWTManager()
+cors = CORS()
 login_manager = LoginManager()
 login_manager.login_message = 'Please login to continue'
 login_manager.login_view = 'user.login'
@@ -31,6 +32,7 @@ def create_app(config=DevelopmentConfig):
     login_manager.init_app(app)
     login_manager.session_protection = "strong"
     mail.init_app(app)
+    cors.init_app(app, resources={r"/*": {"origins": "*"}})
     from crop_analysis.models.Crop import Crop
     from crop_analysis.models.CropData import CropData
     from crop_analysis.models.District import District
