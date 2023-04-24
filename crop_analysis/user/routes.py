@@ -404,4 +404,5 @@ def crop_production_by_state():
         crop['profit'] = sum(crop['profit']) / len(crop['profit'])
         crop['yield_data'] = sum(crop['yield_data']) / len(crop['yield_data'])
         result.append(crop)
-    return jsonify(result)
+    result_final = {"data" : result}
+    return result_final, status.HTTP_200_OK
