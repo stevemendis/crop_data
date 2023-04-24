@@ -373,8 +373,8 @@ def logout():
   
 
 @user.route('/crop/visualize/<string:token>', methods=['GET'])
-@jwt_required(token)
-def crop_production_by_state():
+@jwt_required()
+def crop_production_by_state(token):
     district_name = token
     district_id = District.query.filter_by(district_name=district_name).first()
     print("DSa", district_id.district_id)
