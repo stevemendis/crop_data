@@ -372,10 +372,10 @@ def logout():
     return response
   
 
-@user.route('/crop/visualize', methods=['POST'])
-@jwt_required()
+@user.route('/crop/visualize/<string:token>', methods=['GET'])
+@jwt_required(token)
 def crop_production_by_state():
-    district_name = request.json.get('district_name', '')
+    district_name = token
     district_id = District.query.filter_by(district_name=district_name).first()
     print("DSa", district_id.district_id)
     crop_data = CropData.query.filter_by(district_id=district_id.district_id).all()
