@@ -372,7 +372,7 @@ def logout():
     return response
   
 
-@user.route('/crop/visualize', methods=['GET'])
+@user.route('/crop/visualize', methods=['POST'])
 @jwt_required()
 def crop_production_by_state():
     district_name = request.json.get('district_name', '')
